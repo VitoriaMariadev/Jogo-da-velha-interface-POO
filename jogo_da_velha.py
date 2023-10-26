@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import json
+from creditos import creditos
 
 def salvar_dicionarios(dicionario, nome_do_arquivo):
     """
@@ -29,6 +30,7 @@ layout = [
             [sg.Button('', size=(7,3), key='1'), sg.Button('', size=(7,3), key='2'), sg.Button('', size=(7,3), key='3')],
             [sg.Button('', size=(7,3), key='4'), sg.Button('', size=(7,3), key='5'), sg.Button('', size=(7,3), key='6')],
             [sg.Button('', size=(7,3), key='7'), sg.Button('', size=(7,3), key='8'), sg.Button('', size=(7,3), key='9')],
+            [sg.Button('Sobre',font=('Arial 14'), size=(9,1), key='sobre')],
         ]
 
 janela = sg.Window('Produtos', layout, element_justification='c')
@@ -100,7 +102,7 @@ while True:
     eventos, valores = janela.read()
     if eventos == sg.WIN_CLOSED: 
         break
-    if eventos:
+    if eventos != 'sobre':
 
         if checar_casa(lista_de_jogadas, int(eventos) - 1):
             janela[eventos].update(jogador)
@@ -128,3 +130,9 @@ while True:
             janela['jogador'].update(f'Jogador: {jogador}')
         else:
             sg.popup('Casa ocupada')
+
+    elif eventos == 'sobre':
+        janela.hide()
+        creditos()
+        janela.un_hide()
+    
