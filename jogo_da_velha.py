@@ -125,7 +125,11 @@ while True:
 
             if contador == 9:
                 sg.popup(f'O jogo deu velha!')     
-                limpar_tabuleiro()
+                if sg.popup_yes_no('Deseja continuar jogando?') == 'Yes':
+                    limpar_tabuleiro()
+                    continue
+                else:
+                    break
             mudar_jogador()
             janela['jogador'].update(f'Jogador: {jogador}')
         else:
